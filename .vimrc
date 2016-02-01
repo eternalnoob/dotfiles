@@ -4,70 +4,67 @@ filetype plugin indent off
 
 "set runtime path to include vundle
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-"Vundle must manage Vundle
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin()
 
 "vim Colors Solarized
-Plugin 'altercation/vim-colors-solarized'
+Plug 'altercation/vim-colors-solarized'
 
 "Configure vim plugins
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
+"maybe we can make YCM use jedi?"
+Plug 'davidhalter/jedi-vim',{ 'for': 'python'}
 "Youcompleteme substring search code completion
-Plugin 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe', { 'for': 'cpp' }
 "Syntastic to allow for syntax checking
-Plugin 'scrooloose/syntastic'
+Plug 'scrooloose/syntastic'
 "Nerdtree for traversing directories
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 "git plugin to show status of files in nerdtree
-Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 "vim dispatch to allow for compilation within vim
-Plugin 'tpope/vim-dispatch'
+Plug 'tpope/vim-dispatch'
 "keep track of ruby environments
 "Tpope is life
-Plugin 'thoughtbot/vim-rspec'
-Plugin 'tpope/vim-rbenv'
-Plugin 'vim-ruby/vim-ruby'
+Plug 'thoughtbot/vim-rspec'
+Plug 'tpope/vim-rbenv'
+Plug 'vim-ruby/vim-ruby'
 "Sensible vim standards
-Plugin 'tpope/vim-sensible'
+Plug 'tpope/vim-sensible'
 "ACK
-Plugin 'mileszs/ack.vim'
+Plug 'mileszs/ack.vim'
 
 "ctrlp is like my entire workflow
-Plugin 'kien/ctrlp.vim'
+Plug 'kien/ctrlp.vim'
 "ag allows ctrlp to be much faster
-Plugin 'rking/ag.vim'
+Plug 'rking/ag.vim'
 
 "Git undo is like a beautiful tree, Use this if it breaks
-Plugin 'sjl/gundo.vim'
+Plug 'sjl/gundo.vim'
 
 "vim-easymotion makes vim like vimium! Are we recursing yet?
-Plugin 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 "edkolev/tmuxline.vim is a thing to integrate tmux and airline
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
+Plug 'bling/vim-airline'
 "tabular to make indentation nicer, we're gonna be coding python, after all
-Plugin 'godlygeek/tabular'
+Plug 'godlygeek/tabular'
 
 "stop asking me dumb stuff about swp files
-Plugin 'chrisbra/Recover.vim'
+Plug 'chrisbra/Recover.vim'
 
 "javascript syntax highlighting
-Plugin 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 
 "Tern is installed so that we can use YCM autocompletion for javascript
-Plugin 'ternjs/tern_for_vim'
+Plug 'ternjs/tern_for_vim'
 
-"maybe we can make YCM use jedi?"
-Plugin 'davidhalter/jedi-vim'
 
 "Begin all the nonsense of me trying to get react
-Plugin 'mxw/vim-jsx'
+Plug 'mxw/vim-jsx'
 
-Plugin 'hdima/python-syntax'
+Plug 'hdima/python-syntax'
 
-call vundle#end()
+call plug#end()
 
 
 "nerdtree
@@ -116,10 +113,10 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_autoclose_preview_window_after_completion=1
 nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_filetype_blacklist = { 'python': 1}
-let g:ycm_path_to_python_interpreter = '/home/ethan/miniconda2/envs/CS101completer/bin/python'
+let g:ycm_path_to_python_interpreter = '/home/ethan/anaconda/envs/CS101completer/bin/python'
 "
 "syntastic
-let g:syntastic_python_python_exec = 'home/ethan/miniconda2/envs/CS101/bin/python'
+let g:syntastic_python_python_exec = 'home/ethan/anaconda/envs/CS101/bin/python'
 let g:syntastic_cpp_check_header = 1
 let g:syntastic_cpp_checkers = ['gcc']
 let g:syntastic_error_symbol = '✗'
@@ -140,6 +137,9 @@ syntax enable
 "vim colors solarized
 let g:solarized_termtrans=1
 let g:solarized_contrast="high"
+if exists("g:jedi#force_python")
+exec("command! -nargs=1 Python ".g:jedi#force_python." ")
+end
 
 "Gundo
 nnoremap <leader>u :GundoToggle<CR>
